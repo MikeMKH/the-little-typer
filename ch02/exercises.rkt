@@ -32,19 +32,24 @@
     (λ (a d)
       (cons d a))))
 
-; 3.24
-(claim +
-  (-> Nat Nat
-      Nat))
+;----------------------
+; need to add + define
+; taken from chapter 3
+;----------------------
 
 ; 3.26
 (claim step-+
-  (-> Nat
+  (→ Nat
       Nat))
 
 (define step-+
   (λ (+n-1)
     (add1 +n-1)))
+
+; 3.24
+(claim +
+  (→ Nat Nat
+      Nat))
 
 ; 3.27
 (define +
