@@ -58,3 +58,29 @@
 (check-same Nat 0 (* 2 0))
 (check-same Nat 12 (* 2 6))
 (check-same Nat 12 (* 6 2))
+
+; 74
+(claim step-factorial
+  (→ Nat Nat
+     Nat))
+
+(define step-factorial
+  (λ (n-1 factorial_n-1)
+    (* (add1 n-1) factorial_n-1)))
+
+(claim factorial
+  (→ Nat
+     Nat))
+
+(define factorial
+  (λ (n)
+    (rec-Nat n
+      1
+      step-factorial)))
+
+(check-same Nat (factorial 0) 1)
+(check-same Nat (factorial 1) 1)
+(check-same Nat (factorial 2) 2)
+(check-same Nat (factorial 3) 6)
+(check-same Nat (factorial 4) 24)
+(check-same Nat (factorial 5) 120)
