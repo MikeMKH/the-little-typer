@@ -2,33 +2,33 @@
 
 ; 12
 (claim mot-peas
-  (-> Nat
+  (→ Nat
       U))
 
 ; 13
 (define mot-peas
-  (lambda (k)
+  (λ (k)
     (Vec Atom k)))
 
 ; 20
 (claim step-peas
-  (Pi ((l-1 Nat))
-    (-> (mot-peas l-1)
+  (Π ((l-1 Nat))
+    (→ (mot-peas l-1)
         (mot-peas (add1 l-1)))))
 
 (define step-peas
-  (lambda (l-1)
-    (lambda (peas_l-1)
+  (λ (l-1)
+    (λ (peas_l-1)
       (vec:: 'peas peas_l-1))))
 
 ; 4
 (claim peas
-  (Pi ((how-many Nat))
+  (Π ((how-many Nat))
     (Vec Atom how-many)))
 
 ; 25
 (define peas
-  (lambda (how-many)
+  (λ (how-many)
     (ind-Nat how-many
       mot-peas
       vecnil
@@ -40,49 +40,49 @@
 
 ; 33
 (claim base-last
-  (Pi ((E U))
-    (-> (Vec E (add1 zero))
+  (Π ((E U))
+    (→ (Vec E (add1 zero))
         E)))
 
 ; 34
 (define base-last
-  (lambda (E)
-    (lambda (es)
+  (λ (E)
+    (λ (es)
       (head es))))
 
 ; 40
 (claim mot-last
-  (-> U Nat
+  (→ U Nat
       U))
 
 (define mot-last
-  (lambda (E k)
-    (-> (Vec E (add1 k))
+  (λ (E k)
+    (→ (Vec E (add1 k))
         E)))
 
 ; 49
 (claim step-last
-  (Pi ((E U)
+  (Π ((E U)
        (l-1 Nat))
-    (-> (mot-last E l-1)
+    (→ (mot-last E l-1)
         (mot-last E (add1 l-1)))))
 
 (define step-last
-  (lambda (E l-1)
-    (lambda (last_l-1)
-      (lambda (es)
+  (λ (E l-1)
+    (λ (last_l-1)
+      (λ (es)
         (last_l-1 (tail es))))))
 
 ; 28
 (claim last
-  (Pi ((E U)
+  (Π ((E U)
        (l Nat))
-    (-> (Vec E (add1 l))
+    (→ (Vec E (add1 l))
         E)))
 
 ; 54
 (define last
-  (lambda (E l)
+  (λ (E l)
     (ind-Nat l
       (mot-last E)
       (base-last E)
