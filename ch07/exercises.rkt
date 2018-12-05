@@ -91,3 +91,25 @@
 (check-same Atom (last Atom 9 (peas 10)) 'peas)
 (check-same Nat (last Nat 0 (vec:: 1 vecnil)) 1)
 (check-same Nat (last Nat 1 (vec:: 1 (vec:: 2 vecnil))) 2)
+
+;-----------------------------------
+; One Piece at a Time
+;-----------------------------------
+
+(claim pies
+  (Π ((n Nat))
+    (Vec Atom n)))
+
+(define pies
+  (λ (n)
+    (ind-Nat n
+      (λ (k)
+        (Vec Atom k))
+      vecnil
+      (λ (n-1 almost)
+        (vec:: 'pie almost)))))
+
+(check-same (Vec Atom 0) (pies 0) vecnil)
+(check-same (Vec Atom 2) (pies 2) (vec:: 'pie (vec:: 'pie vecnil)))
+
+(check-same Atom (last Atom 99 (pies 100)) 'pie)
