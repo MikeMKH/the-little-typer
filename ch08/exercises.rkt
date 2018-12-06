@@ -19,11 +19,11 @@
 
 ; 5
 (claim incr
-  (-> Nat
+  (→ Nat
       Nat))
 
 (define incr
-  (lambda (n)
+  (λ (n)
     (iter-Nat n
       1
       (+ 1))))
@@ -42,21 +42,21 @@
 
 ; 38
 (claim +1=add1
-  (Pi ((n Nat))
+  (Π ((n Nat))
     (= Nat (+ 1 n) (add1 n))))
 
 ; 41
 (define +1=add1
-  (lambda (n)
+  (λ (n)
     (same (add1 n))))
 
 ; 60
 (claim mot-incr=add1
-  (-> Nat
+  (→ Nat
       U))
 
 (define mot-incr=add1
-  (lambda (k)
+  (λ (k)
     (= Nat (incr k) (add1 k))))
 
 ; 59
@@ -68,8 +68,8 @@
 
 ; 69
 (claim step-incr=add1
-  (Pi ((n-1 Nat))
-    (-> (= Nat
+  (Π ((n-1 Nat))
+    (→ (= Nat
           (incr n-1)
           (add1 n-1))
         (= Nat
@@ -80,18 +80,18 @@
 
 ; 80
 (define step-incr=add1
-  (lambda (n-1)
-    (lambda (incr=add1_n-1)
+  (λ (n-1)
+    (λ (incr=add1_n-1)
       (cong incr=add1_n-1 (+ 1)))))
 
 ; 43
 (claim incr=add1
-  (Pi ((n Nat))
+  (Π ((n Nat))
     (= Nat (incr n) (add1 n))))
 
 ; 81
 (define incr=add1
-  (lambda (n)
+  (λ (n)
     (ind-Nat n
       mot-incr=add1
       base-incr=add1
@@ -99,11 +99,11 @@
 
 ; 90 with pies!
 (claim pie
-  (-> Atom
+  (→ Atom
       Atom))
 
 (define pie
-  (lambda (all-pies)
+  (λ (all-pies)
     'delicious))
 
 (check-same Atom (pie 'pumpkin) (pie 'honey))
