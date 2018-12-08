@@ -7,7 +7,7 @@
 ; 3.24
 (claim +
   (→ Nat Nat
-      Nat))
+    Nat))
 
 ; 3.27
 (define +
@@ -20,7 +20,7 @@
 ; 21
 (claim double
   (→ Nat
-      Nat))
+    Nat))
 
 (define double
   (λ (n)
@@ -48,7 +48,7 @@
 ; 39
 (claim mot-twice=double
   (→ Nat
-      U))
+    U))
 
 ; 40
 (define mot-twice=double
@@ -60,7 +60,7 @@
 ; 48
 (claim mot-step-twice=double
   (→ Nat Nat
-      U))
+    U))
 
 (define mot-step-twice=double
   (λ (n-1 k)
@@ -95,7 +95,7 @@
 ; 29
 (claim add1+=+add1
   (Π ((n Nat)
-       (m Nat))
+      (m Nat))
     (= Nat
        (add1 (+ n m))
        (+ n (add1 m)))))
@@ -151,3 +151,54 @@
 
 (check-same Nat (twice 17) (double 17))
 (check-same (= Nat 34 34) (twice=double 17) (same 34))
+
+;----------------------------------
+; playing with same and symm
+;----------------------------------
+
+(claim identity
+  (Π ((u U))
+    (→ u
+        u)))
+
+(define identity
+  (λ (E x) x))
+
+(check-same Nat (identity Nat 1) 1)
+(check-same Atom (identity Atom 'a) 'a)
+
+(claim identity-again
+  (Π ((u U))
+    (→ u
+      u)))
+
+(define identity-again
+  (λ (E y) y))
+
+(claim identity=identity-again
+  (Π ((u U)
+      (v u))
+    (= u
+       (identity u v)
+       (identity-again u v))))
+
+(define identity=identity-again
+  (λ (E v)
+    (same v)))
+
+(check-same (= Nat 1 1) (identity=identity-again Nat 1) (same 1))
+(check-same (= Atom 'a 'a) (identity=identity-again Atom 'a) (same 'a))
+
+(claim identity-again=identity
+  (Π ((u U)
+      (v u))
+    (= u
+       (identity-again u v)
+       (identity u v))))
+
+(define identity-again=identity
+  (λ (E v)
+    (symm (identity=identity-again E v))))
+
+(check-same (= Nat 1 1) (identity-again=identity Nat 1) (same 1))
+(check-same (= Atom 'a 'a) (identity-again=identity Atom 'a) (same 'a))
