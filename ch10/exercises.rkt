@@ -31,37 +31,37 @@
 
 ; 70
 (claim mot-list->vec
-  (Pi ((E U))
-    (-> (List E)
+  (Π ((E U))
+    (→ (List E)
         U)))
 
 (define mot-list->vec
-  (lambda (E es)
+  (λ (E es)
     (Vec E (length E es))))
 
 ; 71
 (claim step-list->vec
-  (Pi ((E U)
+  (Π ((E U)
        (e E)
        (es (List E)))
-    (-> (mot-list->vec E es)
+    (→ (mot-list->vec E es)
         (mot-list->vec E (:: e es)))))
 
 ; 72
 (define step-list->vec
-  (lambda (E e es)
-    (lambda (list->vec_es)
+  (λ (E e es)
+    (λ (list->vec_es)
       (vec:: e list->vec_es))))
 
 ; 54
 (claim list->vec
-  (Pi ((E U)
+  (Π ((E U)
        (es (List E)))
     (Vec E (length E es))))
 
 ; 77
 (define list->vec
-  (lambda (E es)
+  (λ (E es)
     (ind-List es
       (mot-list->vec E)
       vecnil
