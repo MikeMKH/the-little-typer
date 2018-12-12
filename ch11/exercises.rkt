@@ -83,39 +83,39 @@
 
 ; 31
 (claim mot-vec->list
-  (Pi ((E U)
+  (Π ((E U)
        (l Nat))
-    (-> (Vec E l)
+    (→ (Vec E l)
         U)))
 
 (define mot-vec->list
-  (lambda (E l)
-    (lambda (es)
+  (λ (E l)
+    (λ (es)
       (List E))))
 
 (claim step-vec->list
-  (Pi ((E U)
+  (Π ((E U)
        (l-1 Nat)
        (e E)
        (es (Vec E l-1)))
-    (-> (mot-vec->list E l-1 es)
+    (→ (mot-vec->list E l-1 es)
         (mot-vec->list E (add1 l-1) (vec:: e es)))))
 
 (define step-vec->list
-  (lambda (E l-1 e es)
-    (lambda (vec->list_es)
+  (λ (E l-1 e es)
+    (λ (vec->list_es)
       (:: e vec->list_es))))
 
 ; 32
 (claim vec->list
-  (Pi ((E U)
+  (Π ((E U)
        (l Nat))
-    (-> (Vec E l)
+    (→ (Vec E l)
         (List E))))
 
 (define vec->list
-  (lambda (E l)
-    (lambda (es)
+  (λ (E l)
+    (λ (es)
       (ind-Vec l es
         (mot-vec->list E)
         nil
@@ -134,7 +134,7 @@
   (:: 'a nil))
 
 ;-----------------------
-; length from chapter 5
+; need length from chapter 5
 ;-----------------------
 
 ; 5.38
@@ -206,12 +206,12 @@
 
 ; 39
 (claim mot-list->vec->list=
-  (Pi ((E U))
-    (-> (List E)
+  (Π ((E U))
+    (→ (List E)
         U)))
 
 (define mot-list->vec->list=
-  (lambda (E es)
+  (λ (E es)
     (= (List E)
       es
       (vec->list E
@@ -220,33 +220,33 @@
 
 ; 53
 (claim ::-fun
-  (Pi ((E U))
-    (-> E (List E)
+  (Π ((E U))
+    (→ E (List E)
         (List E))))
 
 (define ::-fun
-  (lambda (E)
-    (lambda (e es)
+  (λ (E)
+    (λ (e es)
       (:: e es))))
 
 ; 40
 (claim step-list->vec->list=
-  (Pi ((E U)
+  (Π ((E U)
        (e E)
        (es (List E)))
-  (-> (mot-list->vec->list= E es)
+  (→ (mot-list->vec->list= E es)
       (mot-list->vec->list= E (:: e es)))))
 
 ; 54
 (define step-list->vec->list=
-  (lambda (E e es)
-    (lambda (list->vec->list=_es)
+  (λ (E e es)
+    (λ (list->vec->list=_es)
       (cong list->vec->list=_es
         (::-fun E e)))))
 
 ; 35
 (claim list->vec->list=
-  (Pi ((E U)
+  (Π ((E U)
        (es (List E)))
     (= (List E)
        es
@@ -255,7 +255,7 @@
 
 ; 55
 (define list->vec->list=
-  (lambda (E es)
+  (λ (E es)
     (ind-List es
       (mot-list->vec->list= E)
       (same nil)
