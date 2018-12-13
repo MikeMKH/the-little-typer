@@ -142,3 +142,19 @@
 
 (define six-is-even
   (add1-odd->even 5 five-is-odd))
+
+(claim +two-odd
+  (Π ((n Nat))
+    (→ (Odd n)
+        (Odd (+ 2 n)))))
+
+(define +two-odd
+  (λ (n e_n)
+    (cons (add1 (car e_n))
+      (cong (cdr e_n) (+ 2)))))
+
+(claim seven-is-odd
+  (Odd 7))
+
+(define seven-is-odd
+  (+two-odd 5 five-is-odd))
