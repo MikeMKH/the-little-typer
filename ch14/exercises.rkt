@@ -52,3 +52,23 @@
 
 (check-same (Maybe Nat) (maybe-head Nat (:: 1 nil)) (just Nat 1))
 (check-same (Maybe Nat) (maybe-head Nat nil) (nothing Nat))
+
+; 15
+(claim maybe-tail
+  (Π ((E U))
+    (→ (List E)
+        (Maybe (List E)))))
+
+(define maybe-tail
+  (λ (E es)
+    (rec-List es
+      (nothing (List E))
+      (λ (hd tl tail_tl)
+        (just (List E) tl)))))
+
+(check-same (Maybe (List Nat))
+  (maybe-tail Nat nil)
+  (nothing (List Nat)))
+(check-same (Maybe (List Nat))
+  (maybe-tail Nat (:: 1 (:: 2 (:: 3 nil))))
+  (just (List Nat) (:: 2 (:: 3 nil))))
