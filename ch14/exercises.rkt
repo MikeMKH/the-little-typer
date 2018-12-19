@@ -169,10 +169,25 @@
       (step-vec-ref E))))
 
 (check-same Atom 'b
-  (vec-ref Atom 4
-    (fadd1 3
-      (fzero 2))
-    (vec:: 'a
-      (vec:: 'b
-        (vec:: 'c
-          (vec:: 'd vecnil))))))
+  (vec-ref Atom 2 (fadd1 1 (fzero 0))
+    (vec:: 'a (vec:: 'b vecnil))))
+
+(check-same Atom 'b
+  (vec-ref Atom 4 (fadd1 3 (fzero 2))
+    (vec:: 'a (vec:: 'b (vec:: 'c (vec:: 'd vecnil))))))
+
+(check-same Nat 1
+  (vec-ref Nat 4 (fzero 3)
+    (vec:: 1 (vec:: 2 (vec:: 3 (vec:: 4 vecnil))))))
+
+(check-same Nat 2
+  (vec-ref Nat 4 (fadd1 3 (fzero 2))
+    (vec:: 1 (vec:: 2 (vec:: 3 (vec:: 4 vecnil))))))
+
+(check-same Nat 3
+  (vec-ref Nat 4 (fadd1 3 (fadd1 2 (fzero 1)))
+    (vec:: 1 (vec:: 2 (vec:: 3 (vec:: 4 vecnil))))))
+
+(check-same Nat 4
+  (vec-ref Nat 4 (fadd1 3 (fadd1 2 (fadd1 1 (fzero 0))))
+    (vec:: 1 (vec:: 2 (vec:: 3 (vec:: 4 vecnil))))))
