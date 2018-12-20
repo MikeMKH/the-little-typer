@@ -85,3 +85,39 @@
 (define sub1=
   (λ (n j)
     (use-Nat= (add1 n) (add1 j))))
+
+; Principle of the Excluded Middle
+; 90
+(claim pem-not-false
+  (Π ((X U))
+    (→ (→ (Either X
+              (→ X
+                Absurd))
+          Absurd)
+      Absurd)))
+
+; 103
+(define pem-not-false
+  (λ (X)
+    (λ (pem-false)
+      (pem-false
+        (right
+          (λ (x)
+            (pem-false
+              (left x))))))))
+
+; 107
+(claim Dec
+  (→ U
+      U))
+
+(define Dec
+  (λ (X)
+    (Either X
+      (→ X
+          Absurd))))
+
+; 108
+(claim pem
+  (Π ((X U))
+    (Dec X)))
